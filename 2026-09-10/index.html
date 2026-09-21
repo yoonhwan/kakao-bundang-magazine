@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%20fill%3D%22%23fff%22%20stroke%3D%22%23111%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2221%22%20cy%3D%2219%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2215%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2220%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2232%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2229%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2241%22%20cy%3D%2230%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2249%22%20cy%3D%2234%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2245%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2233%22%20cy%3D%2243%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2246%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2255%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3C/svg%3E">
+  <title>분당방 데일리</title>
+  <style>
+    :root {
+      --red: #e30613;
+      --ink: #111;
+      --paper: #fff;
+      --soft: #f2f2f2;
+      --muted: #686868;
+      --line: #c8c8c8;
+      --font: "Helvetica Neue", "Akzidenz-Grotesk", Inter, Arial, "Apple SD Gothic Neo", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --ink:#fff; --paper:#080808; --soft:#171717; --muted:#aaa; --line:#3b3b3b; }
+    }
+    :root[data-theme="light"] { --ink:#111; --paper:#fff; --soft:#f2f2f2; --muted:#686868; --line:#c8c8c8; }
+    :root[data-theme="dark"] { --ink:#fff; --paper:#080808; --soft:#171717; --muted:#aaa; --line:#3b3b3b; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; }
+    button { font:inherit; }
+    h1,h2,h3,p,figure,blockquote,ol,ul { margin:0; }
+    ol,ul { padding:0; }
+    .page { width:min(100% - 40px, 1280px); margin:0 auto; padding:28px 0 64px; }
+    .grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; }
+    .kicker { color:var(--red); font-size:.72rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .rule { border-top:1px solid var(--ink); }
+
+    .mast { border-top:8px solid var(--red); padding-top:18px; }
+    .brand { grid-column:1 / span 3; font-size:clamp(1.1rem,2vw,1.65rem); font-weight:900; letter-spacing:-.04em; line-height:1; }
+    .issue { grid-column:10 / -1; text-align:right; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .hero { margin-top:72px; align-items:end; }
+    .hero-date { grid-column:1 / span 8; font-size:clamp(3.2rem,8.7vw,8.2rem); font-weight:900; letter-spacing:-.075em; line-height:.82; word-break:keep-all; }
+    .hero-note { grid-column:10 / -1; padding-top:12px; border-top:1px solid var(--ink); font-size:.82rem; font-weight:700; }
+    .hero-note span { display:block; margin-top:8px; color:var(--muted); font-weight:500; }
+    .persona-greet { margin-top:20px; padding:22px 0 26px; border-top:3px solid var(--ink); border-bottom:1px solid var(--line); align-items:start; }
+    .persona-greet .quote-label { padding-top:7px; line-height:1.6; }
+    .persona-greet p { grid-column:4 / -1; min-width:0; margin:0; color:var(--ink); font-size:clamp(1.2rem,2.1vw,1.75rem); font-weight:600; letter-spacing:-.035em; line-height:1.6; word-break:keep-all; overflow-wrap:anywhere; }
+
+    .metrics { margin-top:64px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); }
+    .metric { grid-column:span 2; min-height:145px; padding:16px 12px 18px 0; border-right:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; }
+    .metric:last-child { border-right:0; }
+    .metric strong { font-size:clamp(2.2rem,4.6vw,4.6rem); font-weight:900; letter-spacing:-.06em; line-height:.9; font-variant-numeric:tabular-nums; }
+    .metric span { max-width:10rem; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .metric em { color:var(--red); font-style:normal; }
+
+    .jump { margin-top:18px; display:flex; flex-wrap:wrap; gap:6px 20px; }
+    .jump a { text-decoration:none; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .jump a::before { content:"↘ "; color:var(--red); }
+
+    .theme-switch { margin-top:16px; display:flex; gap:6px; }
+    .theme-switch button { border:1px solid var(--line); background:transparent; color:var(--muted); padding:5px 11px; font-size:.68rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; cursor:pointer; }
+    .theme-switch button.on { border-color:var(--red); color:var(--red); }
+
+    .quote { margin-top:120px; padding:20px 0 28px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); }
+    .quote-label { grid-column:1 / span 3; }
+    .quote blockquote { grid-column:4 / span 7; font-size:clamp(1.9rem,4.3vw,4.5rem); font-weight:800; letter-spacing:-.045em; line-height:1.05; word-break:keep-all; }
+    .quote figcaption { grid-column:11 / -1; align-self:end; font-size:.78rem; font-weight:700; text-align:right; }
+
+    .section { margin-top:120px; }
+    .section-head { align-items:end; padding-bottom:14px; border-bottom:3px solid var(--ink); }
+    .section-index { grid-column:1; color:var(--red); font-size:.8rem; font-weight:900; }
+    .section-title { grid-column:2 / span 7; font-size:clamp(1.8rem,3.4vw,3.6rem); font-weight:900; letter-spacing:-.055em; line-height:.95; }
+    .section-meta { grid-column:10 / -1; text-align:right; color:var(--muted); font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .xall { grid-column:10 / -1; justify-self:end; border:0; border-bottom:1px solid var(--ink); padding:2px 0; background:transparent; color:var(--ink); cursor:pointer; font-size:.72rem; font-weight:800; text-transform:uppercase; }
+
+    details.row { border-bottom:1px solid var(--line); }
+    details.row > summary { min-height:94px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; align-items:center; padding:15px 0; cursor:pointer; list-style:none; }
+    details.row > summary::-webkit-details-marker { display:none; }
+    details.row > summary:focus-visible { outline:2px solid var(--red); outline-offset:4px; }
+    details.row .no { grid-column:1; color:var(--red); font-size:1.15rem; font-weight:900; font-variant-numeric:tabular-nums; }
+    details.row .hd { grid-column:2 / span 9; font-size:clamp(1rem,1.65vw,1.35rem); font-weight:700; letter-spacing:-.025em; }
+    details.row .t { display:inline-block; min-width:4.2rem; margin-right:18px; color:var(--muted); font-size:.72rem; font-weight:700; letter-spacing:.05em; vertical-align:.16em; }
+    details.row .chev { grid-column:12; justify-self:end; color:var(--red); font-size:1.6rem; line-height:1; transition:transform .18s ease; }
+    details.row[open] .chev { transform:rotate(90deg); }
+    details.row .det { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:0 0 30px; }
+    details.row .det p { grid-column:4 / span 7; max-width:60ch; color:var(--muted); font-size:.95rem; line-height:1.75; }
+    .nodet { padding:20px 0; color:var(--muted); }
+
+    .sched,.links,.lst { list-style:none; }
+    .sched li { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:20px 0; border-bottom:1px solid var(--line); }
+    .sched .when { grid-column:1 / span 3; font-weight:900; }
+    .sched .when em { display:block; color:var(--red); font-size:.7rem; font-style:normal; letter-spacing:.08em; text-transform:uppercase; }
+    .sched .what { grid-column:4 / span 8; }
+    .sched .what > .t { display:inline-block; margin-right:12px; color:var(--red); font-size:.75rem; font-weight:800; }
+    .sched small { display:block; margin-top:5px; color:var(--muted); font-size:.76rem; }
+
+    .links li { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; align-items:start; padding:18px 0; border-bottom:1px solid var(--line); }
+    .links li > .t { grid-column:1 / span 2; color:var(--red); font-size:.68rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .links a { grid-column:3 / span 7; min-width:0; display:flex; flex-direction:column; text-decoration:none; }
+    .links a b { font-size:1rem; line-height:1.35; }
+    .links a span { margin-top:4px; color:var(--muted); font-size:.74rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .links li > small { grid-column:11 / -1; color:var(--muted); font-size:.72rem; text-align:right; }
+    .links .lnote { grid-column:3 / span 7; color:var(--muted); font-size:.72rem; font-style:normal; }
+
+    .split { margin-top:28px; }
+    .split .col { grid-column:span 6; }
+    .split .col:nth-child(even) { border-left:1px solid var(--ink); padding-left:24px; }
+    .col h3 { min-height:40px; display:flex; justify-content:space-between; align-items:start; gap:12px; padding-bottom:10px; border-bottom:1px solid var(--ink); font-size:.82rem; font-weight:900; text-transform:uppercase; }
+    .tag { color:var(--red); font-size:.65rem; letter-spacing:.08em; white-space:nowrap; }
+    .lst li { display:grid; grid-template-columns:72px 1fr; gap:16px; padding:10px 0; border-bottom:1px solid var(--line); font-size:.85rem; }
+    .lst .rk { color:var(--red); font-weight:900; font-variant-numeric:tabular-nums; }
+    .mtop { margin-top:48px; }
+    .mnote { margin-top:18px; color:var(--muted); font-size:.7rem; }
+
+    .bars { display:flex; flex-direction:column; margin-top:24px; }
+    .bar { display:grid; grid-template-columns:44px minmax(120px,2fr) minmax(120px,7fr) 70px; gap:14px; align-items:center; min-height:48px; border-bottom:1px solid var(--line); }
+    .crown,.rank { text-align:center; font-size:.78rem; font-weight:900; }
+    .rank { color:var(--red); }
+    .bar .nm { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.84rem; font-weight:700; }
+    .track { height:12px; background:var(--soft); }
+    .fill { display:block; height:100%; background:var(--red); }
+    .bar .v { text-align:right; font-size:1rem; font-weight:900; font-variant-numeric:tabular-nums; }
+    .podium1 .nm,.podium1 .v { color:var(--red); }
+
+    .archive { margin-top:120px; padding-top:18px; border-top:8px solid var(--red); }
+    .archive-title { grid-column:1 / span 4; font-size:1.7rem; font-weight:900; letter-spacing:-.04em; }
+    .pn { grid-column:7 / -1; display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--ink); }
+    .pn > * { min-height:90px; padding:12px 0; text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; }
+    .pn .nx { padding-left:20px; border-left:1px solid var(--ink); text-align:right; opacity:.45; }
+    .pn small { color:var(--red); font-size:.68rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .pn b { font-size:1.1rem; }
+    .chips { grid-column:1 / span 8; margin-top:44px; display:flex; flex-wrap:wrap; gap:8px; }
+    .chips a { padding:7px 10px; border:1px solid var(--ink); text-decoration:none; font-size:.72rem; font-weight:800; }
+    .chips a.on { border-color:var(--red); background:var(--red); color:#fff; }
+    .all { grid-column:10 / -1; align-self:end; margin-top:44px; color:var(--red); font-size:.78rem; font-weight:900; text-align:right; }
+    .foot { margin-top:70px; padding-top:12px; border-top:1px solid var(--ink); display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+
+    @media (max-width: 760px) {
+      .persona-greet { padding:18px 0 22px; row-gap:12px; }
+      .persona-greet .quote-label { padding-top:0; }
+      .persona-greet p { grid-column:1 / -1; font-size:1.2rem; }
+      .page { width:min(100% - 28px, 680px); padding-top:18px; }
+      .grid { column-gap:10px; }
+      .brand { grid-column:1 / span 7; }
+      .issue { grid-column:9 / -1; }
+      .hero { margin-top:50px; }
+      .hero-date { grid-column:1 / -1; font-size:clamp(3rem,15vw,5.2rem); line-height:.88; }
+      .hero-note { grid-column:7 / -1; margin-top:34px; }
+      .metrics { margin-top:42px; }
+      .metric { grid-column:span 6; min-height:112px; padding:13px 8px 13px 0; border-bottom:1px solid var(--line); }
+      .metric:nth-child(even) { border-right:0; padding-left:10px; }
+      .metric:last-child { grid-column:1 / -1; border-bottom:0; }
+      .metric strong { font-size:2.5rem; }
+      .jump { gap:8px 14px; }
+      .quote,.section { margin-top:78px; }
+      .quote-label { grid-column:1 / -1; }
+      .quote blockquote { grid-column:1 / -1; margin-top:30px; font-size:2rem; }
+      .quote figcaption { grid-column:7 / -1; margin-top:20px; }
+      .section-index { grid-column:1 / span 2; }
+      .section-title { grid-column:3 / -1; font-size:2.1rem; }
+      .section-meta,.xall { grid-column:3 / -1; margin-top:14px; justify-self:start; text-align:left; }
+      details.row > summary { grid-template-columns:34px 1fr 20px; gap:8px; min-height:82px; }
+      details.row .no,details.row .hd,details.row .chev { grid-column:auto; }
+      details.row .t { display:block; margin:0 0 4px; }
+      details.row .det { display:block; padding:0 0 24px 42px; }
+      details.row .det p { max-width:none; font-size:.92rem; }
+      .sched li { grid-template-columns:88px 1fr; gap:14px; }
+      .sched .when,.sched .what { grid-column:auto; }
+      .links li { grid-template-columns:72px 1fr; gap:8px 12px; }
+      .links li > .t,.links a,.links li > small,.links .lnote { grid-column:auto; }
+      .links a { grid-column:2; }
+      .links li > small,.links .lnote { grid-column:2; text-align:left; }
+      .split .col { grid-column:1 / -1; }
+      .split .col:nth-child(even) { margin-top:36px; padding-left:0; border-left:0; }
+      .bar { grid-template-columns:32px 1fr 54px; grid-template-rows:auto auto; gap:4px 10px; padding:9px 0; }
+      .bar .track { grid-column:2 / 4; grid-row:2; height:9px; }
+      .bar .v { grid-column:3; grid-row:1; }
+      .archive-title { grid-column:1 / -1; }
+      .pn { grid-column:1 / -1; margin-top:30px; }
+      .chips { grid-column:1 / -1; }
+      .all { grid-column:1 / -1; justify-self:start; text-align:left; margin-top:24px; }
+      .foot { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto} details.row .chev{transition:none} }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="mast">
+    <div class="grid"><div class="brand">분당방<br>데일리</div><div class="issue">Daily Brief<br>Golf &amp; People</div></div>
+    <div class="grid hero"><h1 class="hero-date">2026년 9월 10일(목)</h1><p class="hero-note">논리적 하루 기준<span>다음날 01:00까지 집계한 최종본</span></p></div>
+  </header>
+  <div class="grid persona-greet">
+    <div class="quote-label kicker">DAIN · 오늘의 캐디</div>
+    <p>애플 아이폰 듀오가 300만~500만 원대라니, 오늘은 휴대폰도 드라이버급 가격으로 화제가 됐네요. 오빠들, 이 정도면 새 폰과 새 골프채 중 하나만 골라야 할 것 같은데 어느 쪽이 더 끌리세요?</p>
+  </div>
+
+  <section class="grid metrics" aria-label="오늘의 통계">
+    <div class="metric"><strong>1,225</strong><span>Messages</span></div>
+    <div class="metric"><strong>50</strong><span>People</span></div>
+    <div class="metric"><strong>12시</strong><span>Peak hour <em>172</em></span></div>
+    <div class="metric"><strong>3</strong><span>Gift games</span></div>
+    <div class="metric"><strong>20</strong><span>Gift wins</span></div>
+    <div class="metric"><strong>24</strong><span>Winners</span></div>
+  </section>
+  <nav class="jump" aria-label="바로가기"><a href="#topics">화제</a><a href="#rounds">하이라이트</a><a href="#sched">일정</a><a href="#links">링크</a><a href="#gift">선물</a><a href="#talk">토크</a></nav>
+  <div class="theme-switch" role="group" aria-label="테마 선택">
+    <button type="button" data-theme-choice="system">시스템</button>
+    <button type="button" data-theme-choice="light">라이트</button>
+    <button type="button" data-theme-choice="dark">다크</button>
+  </div>
+
+  <figure class="grid quote"><div class="quote-label kicker">Quote of the day</div><blockquote>“멤버들이 애플 아이폰 듀오의 폴더블 화면 연출과 사용 연속성, 외부 화면, 반투명 애니메이션을 살펴보며 디자인과 소프트웨어 완”</blockquote><figcaption>— 히즈히즈 오빠</figcaption></figure>
+
+  <section id="topics" class="section">
+    <div class="grid section-head"><span class="section-index">01</span><h2 class="section-title">오늘의 화제</h2><button type="button" class="xall" onclick="var o=this.dataset.o!=='1';document.querySelectorAll('#topics details').forEach(function(d){d.open=o});this.dataset.o=o?'1':'';this.textContent=o?'모두 접기':'모두 펼치기'">모두 펼치기 · 35</button></div>
+    <details class="row" open><summary><span class="no">01</span><span class="hd"><span class="t">06:25</span>애플 아이폰 듀오, 혁신적인 화면과 300만~500만 원대 가격을 두고 갑론을박</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>멤버들이 애플 아이폰 듀오의 폴더블 화면 연출과 사용 연속성, 외부 화면, 반투명 애니메이션을 살펴보며 디자인과 소프트웨어 완성도를 높게 평가했어요. 맥세이프 지원 여부와 무게, 배터리, 저장용량, 애플케어·케이스 가격까지 따져보면서 갤럭시 폴드와 비교하는 이야기도 이어졌네요. 예쁘고 사고 싶다는 반응과 300만~500만 원대 가격은 부담스럽다는 반응이 함께 나왔어요.</p></div></details>
+<details class="row"><summary><span class="no">02</span><span class="hd"><span class="t">06:28</span>굿해빗 소장님 생일 축하와 선착순 선물게임</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>굿해빗 소장님의 생일을 맞아 멤버들이 아침부터 축하 인사를 건넸고, 20일에 가볍게 자리를 마련하자는 이야기도 나왔어요. 이어 생일 기념 선착순 선물게임이 열리면서 여러 멤버가 빠르게 당첨 소식과 감사 인사를 남겼네요.</p></div></details>
+<details class="row"><summary><span class="no">03</span><span class="hd"><span class="t">07:21</span>굿해빗 소장님의 생일 선착순 선물게임, 당첨 행렬</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>굿해빗 소장님이 생일 기념 선착순 선물게임을 열자 여러 멤버가 차례로 당첨됐어요. 감사 인사와 축하 이모지가 이어졌고, 종료를 앞두고도 참여자가 더해졌네요.</p></div></details>
+<details class="row"><summary><span class="no">04</span><span class="hd"><span class="t">08:07</span>페럼 함병철, 메타의 AI 에이전트 비서 MUSE 소개</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>페럼·함병철 오빠가 메타에서 공개한 MUSE를 기존보다 진보한 AI 에이전트 비서라고 소개했어요. 짧게 공유된 소식이라 자세한 기능 논의까지는 이어지지 않았네요.</p></div></details>
+<details class="row"><summary><span class="no">05</span><span class="hd"><span class="t">08:53</span>무리뉴, 우정힐스 10월 라운드 빈자리 모집</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>무리뉴 오빠가 우정힐스 10월 8일과 9일 라운드 조합을 공유하며 함께 갈 멤버가 있는지 물었어요. 각 날짜의 예정 멤버와 분희 오빠가 티를 잡지 못하면 일정이 무산될 수 있다는 조건도 함께 전했네요.</p></div></details>
+<details class="row"><summary><span class="no">06</span><span class="hd"><span class="t">09:07</span>제나토리, 브룸스틱과 특이한 골프 장비 취향을 공개</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리 오빠가 스카티 카메론 카모백과 브룸스틱을 좋아하는 이유를 이야기하면서 개성 있는 골프 장비 취향을 보여줬어요. 튀는 디자인과 편한 그립을 함께 고려한 선택이라는 설명에 점보맥스 그립 경험담도 보태졌네요.</p></div></details>
+<details class="row"><summary><span class="no">07</span><span class="hd"><span class="t">09:16</span>앤드류 최의 선착순 선물게임과 17분 수익 농담</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>Andrew Choe 오빠가 “선착순 선물게임 시작!”이라고 알리자 여러 멤버가 순식간에 당첨됐어요. 이후 차 출고나 주식 수익 아니냐는 추측이 오갔고, 17분 만의 수익이라니 전문가 같다는 농담도 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">08</span><span class="hd"><span class="t">09:19</span>무리뉴·토비와 멤버들, 10월 우정힐스 세 팀 성원 조율</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>10월 8일·9일·16일 우정힐스 라운드 조 편성이 공유되면서 참석 가능 날짜와 추가 모집 여부를 맞추는 이야기가 이어졌어요. 여러 멤버가 손을 들었고, 데카르트 오빠는 이사 일정으로 참석이 어렵다고 전했네요. 분희 오빠의 참석 여부와 대기자 정리까지 세 팀 성원을 조율했어요.</p></div></details>
+<details class="row"><summary><span class="no">09</span><span class="hd"><span class="t">10:19</span>냉라면·즐겨참기, 한로로와 잔나비를 둘러싼 음악 수다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>냉라면 오빠가 한로로 영상을 보다가 익숙한 얼굴 이야기를 꺼내면서 경남 출신이라는 공통점과 잔나비 이야기로 대화가 넓어졌어요. 한로로의 표정과 토크 장면, 쵸단·우효·QWER 이야기까지 이어졌고, 잔나비의 나이를 잘못 짚은 냉라면 오빠에게 “냉형 실망입니다.”라는 장난도 나왔네요.</p></div></details>
+<details class="row"><summary><span class="no">10</span><span class="hd"><span class="t">10:36</span>진독의 빡빡한 회의와 삼성전자 주가 농담</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>내곰 오빠가 아이폰 듀오를 사고 싶은 마음을 삼성전자 주가와 연결해 장난을 건 뒤, 진독 오빠가 오전에 네 개의 회의가 연달아 잡혀 있다고 전했어요. 매수 준비와 전날 골프 결과를 둘러싼 짧은 이야기도 이어졌고, 배고파요 오빠가 영상과 함께 “0+0는 이게 제맛이죠”라고 받아쳤네요.</p></div></details>
+<details class="row"><summary><span class="no">11</span><span class="hd"><span class="t">12:25</span>제나토리, 63빌딩 스카이피크닉을 가족 나들이 명소로 추천</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리 오빠가 63빌딩 스카이피크닉에 다녀온 이야기를 꺼내며 아이들과 가족이 좋아할 만한 장소라고 소개했어요. 사진 찍기 좋고 생각보다 오래 머물렀으며, 밤에 방문하는 편이 더 좋다는 팁도 전했네요.</p></div></details>
+<details class="row"><summary><span class="no">12</span><span class="hd"><span class="t">12:28</span>한국용·불법, 폴드8과 애플 폴더블의 무게·가격을 비교</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>냉라면 오빠가 폴드8 1TB와 애플 폴더블 제품의 가격을 비교하면서 이야기가 시작됐어요. 폴드8의 무게와 디자인, 두께와 손목 부담을 놓고 의견이 갈렸고 플립으로 바꿀지 고민하는 이야기도 나왔네요. 2TB 모델 가격과 디스플레이 주름·내구성, 애플케어 비용까지 비교가 이어졌어요.</p></div></details>
+<details class="row"><summary><span class="no">13</span><span class="hd"><span class="t">12:37</span>제나토리·닼돌, 카리나 사진의 출처와 보정 여부를 확인</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리 오빠가 카리나 사진을 공유할지 고민하면서 관련 링크가 오갔어요. 사진의 원본 여부와 합성 가능성, 보정 여부를 확인하는 이야기가 이어졌고, 외모 품평으로 번진 부분은 덜어내고 이미지의 출처와 진위 확인을 중심으로 정리할게요.</p></div></details>
+<details class="row"><summary><span class="no">14</span><span class="hd"><span class="t">12:56</span>재훈이형님과 데카르트, 월례회 스폰서 물품을 확인</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>zaehoon 오빠가 이번 월례회에 초대권을 스폰서하겠다고 알렸어요. 데카르트 오빠는 월례회에 쓰려던 타이틀을 보관이사에 보내버려 10월에 다시 확인해야 한다고 덧붙였네요.</p></div></details>
+<details class="row"><summary><span class="no">15</span><span class="hd"><span class="t">13:10</span>희야, 신안CC 공사 여부와 라운드 불편을 확인</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>희야 오빠가 예약 문자에 공사 중이라 불편하다는 안내가 있었다며 신안CC 현장 상황을 물어봤어요. 정확한 공사 범위에 대한 답은 나오지 않았고, 코스 이용과 관련한 가벼운 농담이 오갔네요.</p></div></details>
+<details class="row"><summary><span class="no">16</span><span class="hd"><span class="t">13:20</span>히즈히즈의 발리 한 달 휴가와 카카오 복지 이야기</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>히즈히즈 오빠가 대한항공을 타고 발리로 간다는 소식에 진독과 무리뉴 오빠가 발리 이야기를 보탰어요. 한 달 가까운 휴가와 휴가비 이야기가 나오자 카카오의 30일 유급휴가와 200만 원 지원, 각자 회사의 복지와 상여금 이야기로 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">17</span><span class="hd"><span class="t">13:19</span>드래곤·내곰, 링크 쿠폰과 카드 할인으로 폴드 가격 계산</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>내곰 오빠가 삼성카드 링크 쿠폰이 적용되지 않는 문제를 물어보면서 할인 조건을 확인했어요. 카드 할인과 추가 할인, 상품권을 더해 39만 원대 제품이 혜택 적용 후 33만 원 안팎까지 내려갈 수 있다는 계산이 나왔네요.</p></div></details>
+<details class="row"><summary><span class="no">18</span><span class="hd"><span class="t">13:30</span>불법·프레드, 디아블로 새 시즌 직업을 두고 고민</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>불법 오빠가 디아블로 새 시즌에 소용돌이 야만용사를 다시 할지, 컨트롤이 어려운 술사를 해볼지 고민을 꺼냈어요. 프레드는 획기적인 변화가 없으면 쉬겠다고 하면서도 디아블로 2의 고인물 스타일이 재미있다고 했고, 결국 자신에게 재미있는 스타일을 고르면 된다는 이야기가 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">19</span><span class="hd"><span class="t">14:04</span>제로잇·데카르트, 전기차 보조금과 충전 인프라를 함께 걱정</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>히즈히즈와 제로잇 오빠가 성남시 전기차 보조금으로 차량을 받게 된 소식과 전기차 대란 분위기를 나눴어요. YL 구매와 48개월 할부, 월 130만 원 안팎의 부담, 아파트 지하 충전시설 철거로 인한 충전 경쟁 걱정이 이어졌네요. 데카르트 오빠의 주문과 보조금 자격, 차량 등록 방법, 후륜 처짐 이슈도 함께 확인했어요.</p></div></details>
+<details class="row"><summary><span class="no">20</span><span class="hd"><span class="t">15:09</span>제나토리·에어웨이, 드라이버와 샤프트 후보를 공개</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>에어웨이 오빠가 엘리트 트리플 다이아 GT3 드라이버를 저렴하게 쓸 사람을 찾으면서 장비 이야기가 시작됐어요. 제나토리는 캘러웨이 헤드와 타이틀리스트 샤프트, 투어AD 하이브리드, 이븐롤·스카티 카메론 퍼터 등 여러 후보를 올렸네요. GTS3를 여러 개 준비한 이유는 직접 쳐보고 고르게 하려는 것이었고, GTS4도 온다는 소식이 더해졌어요.</p></div></details>
+<details class="row"><summary><span class="no">21</span><span class="hd"><span class="t">15:21</span>제나토리·아!럭키, 드라이버 어드레스와 헤드 놓는 법을 점검</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리와 아!럭키가 GTS3 어드레스에서 헤드 솔과 뒤쪽을 어떻게 놓는지 이야기했어요. 멤버들이 헤드를 바닥에 붙이는지 들어 올리는지 각자 경험을 보탰고, 셋업에 따라 페이드나 좌우 미스가 달라질 수 있다는 설명도 이어졌네요. 아!럭키는 자신의 탄도와 슬라이스 원인을 다시 점검해보게 됐어요.</p></div></details>
+<details class="row"><summary><span class="no">22</span><span class="hd"><span class="t">16:16</span>제나토리·진독, 아이폰 듀오 애니메이션의 갤럭시 구현 가능성을 따져보다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리가 아이폰 듀오 애니메이션을 공유하며 갤럭시에도 적용되길 기대했고, 멤버들이 삼성 One UI에서 구현할 가능성을 살펴봤어요. 힌지 정보 API와 내부 센서를 활용한 PoC, 특허와 구현 방식, 서드파티 앱과 Galaxy Store 배포 방안까지 기술적인 논의가 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">23</span><span class="hd"><span class="t">16:03</span>제나토리, 아이폰 사설 배터리 교체 경험을 묻다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리 오빠가 아이폰 배터리를 사설 업체에서 교체해본 사람이 있는지 물었어요. 아!럭키 오빠가 여러 번 해봤다고 경험을 보탰지만, 자세한 비용이나 업체 정보까지 이어지지는 않았네요.</p></div></details>
+<details class="row"><summary><span class="no">24</span><span class="hd"><span class="t">16:41</span>히즈히즈·진독, 안드로이드 블러 효과와 삼성 특허팀을 두고 이야기</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>히즈히즈 오빠가 안드로이드에서 서드파티 앱으로 모바일 OS 효과를 바꿀 수 있는지 물었고, 진독 오빠는 현재는 POC 수준의 런처에 가깝지만 실제 SystemUI 구현도 가능해 보인다고 짚었어요. 애플의 반투명·블러 효과와 삼성의 혁신 기대치, 삼성 특허팀과 퀄컴의 특허 대응 비교로 논의가 깊어졌고, 특허보상금을 둘러싼 직장식 농담도 더해졌네요.</p></div></details>
+<details class="row"><summary><span class="no">25</span><span class="hd"><span class="t">16:59</span>진독, 스크린에서 찾은 페이드 감각에 필드 강습을 고민</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>zaehoon 오빠가 애플 스크린의 플러스 모델이 페이드 구사자에게 잘 맞는 것 같다고 말하면서 골프 이야기가 시작됐어요. 진독 오빠는 스크린에서 페이드가 제대로 나왔다며 강습을 받아보고 싶다고 했고, 센서 인식 가능성을 두고 신중한 의견도 나왔네요. 벙커·러프 매트와 뒷땅 감각을 실제 필드와 비교하는 이야기까지 이어졌어요.</p></div></details>
+<details class="row"><summary><span class="no">26</span><span class="hd"><span class="t">17:05</span>진독·제나토리, 애플 스크린 프로젝터 화질에 감탄</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>진독 오빠가 애플 스크린의 시네마4K 프로젝터 화질이 좋다고 하자 제나토리 오빠가 900만 원짜리 장비라고 설명했어요. 방에 따라 선명도 차이가 크고 스크린 천의 주름까지 보인다는 이야기가 이어졌으며, 매장별 교체 시점도 서로 다른 것 같다고 했네요.</p></div></details>
+<details class="row"><summary><span class="no">27</span><span class="hd"><span class="t">17:37</span>달파란·한국용, 월례회 날짜와 아들 인라인 대회를 확인</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>한국용 오빠가 9월 월례회 날짜를 다시 확인하는 사이 달파란 오빠가 9월 20일이라고 바로잡고, 10월 월례회는 17일 토요일이라고 안내했어요. 한국용 오빠는 10월 일정이 아들의 인라인 대회와 겹친다고 전했고 화랑공원 트랙 이야기도 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">28</span><span class="hd"><span class="t">17:42</span>한국용·진독, 아이들 인라인·축구 교육비의 가성비를 논하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>한국용 오빠가 아들이 동네에서 인라인을 배운 지 몇 주 됐다고 하자, 진독 오빠가 아이들이 화랑공원 트랙에서 1년 넘게 배웠다고 덧붙였어요. 이후 수업의 효과와 비용, 축구처럼 칭찬만으로도 아이들이 즐거워하는 종목에 대한 경험담이 오갔네요. 야구·축구 선수반 제안과 시간·비용 부담 이야기도 이어졌어요.</p></div></details>
+<details class="row"><summary><span class="no">29</span><span class="hd"><span class="t">17:52</span>클스웨버의 삭제된 사진을 두고 단체방이 추리 모드</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>클스웨버가 힘들다는 듯한 메시지와 한글 이야기를 남긴 뒤 여러 메시지를 올렸다가 지우면서 멤버들의 궁금증을 키웠어요. 무리뉴와 프레드 오빠가 삭제된 내용이 무엇인지 묻고, 한국용 오빠가 상황극을 보태면서 추리가 이어졌네요. 실제 삭제 내용은 확인되지 않았어요.</p></div></details>
+<details class="row"><summary><span class="no">30</span><span class="hd"><span class="t">19:04</span>행맨, 신페리오 77타와 버디 3개로 선착순 선물을 열다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>행맨 오빠가 선착순 선물게임을 시작하자 여러 멤버가 순식간에 당첨됐고 감사 인사가 이어졌어요. 이어 신페리오 우승과 77타, 버디 3개 기록을 공개해 축하를 받았네요. 선물을 받지 못한 아쉬움과 양토전 예습이 아니었다는 농담도 붙었어요.</p></div></details>
+<details class="row"><summary><span class="no">31</span><span class="hd"><span class="t">19:18</span>양토전을 앞두고 올드헤드·행맨의 승부 응원이 시작되다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>올드헤드 오빠가 양토전 연습을 위해 연습장에 가야겠다고 하자 대회가 얼마 남지 않았다는 이야기가 나왔어요. 불법 오빠가 이벤트를 제안했고, 닼돌 오빠는 백함에게는 지고 행맨에게는 이기라는 응원으로 라이벌 구도를 만들었네요. 대회 날짜도 다시 확인했어요.</p></div></details>
+<details class="row"><summary><span class="no">32</span><span class="hd"><span class="t">20:09</span>냉라면, 에어소프트 작업 선물로 찹쌀떡을 받다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>냉라면 오빠가 에어소프트용 우드파츠를 무료로 광택 작업해준 뒤 고맙다는 뜻으로 찹쌀떡을 받았다고 이야기했어요. 선물을 준 사람이 누구인지 묻는 장난이 이어지며 찹쌀떡을 둘러싼 가벼운 농담으로 번졌네요.</p></div></details>
+<details class="row"><summary><span class="no">33</span><span class="hd"><span class="t">20:26</span>내곰, 잠실 야구장에서 스크린골프로 진독·냉라면을 누르다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>내곰 오빠가 잠실에서 술을 마시면서도 스크린골프를 치고 있다고 전했어요. 진독 오빠는 연속으로 밀리는 상황을 아쉬워했고, 냉라면 오빠는 스크린에서도 공이 이상하게 가고 멘탈이 무너지는 모습을 봤다며 놀렸네요.</p></div></details>
+<details class="row"><summary><span class="no">34</span><span class="hd"><span class="t">21:40</span>무리뉴·멤버들, 행맨 일정 변경에 우정힐스 조 편성을 다시 맞추다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>행맨 오빠가 10월 8일 일정이 생겼다고 알려오면서 우정힐스 라운드 조 편성을 다시 조정했어요. 무리뉴 오빠가 8일·9일·16일 가능 날짜를 확인했고, 토비와 타이틀 오빠도 일정을 조정해 자리를 만들었네요. 행맨 오빠는 최종적으로 16일 조에 들어갔어요.</p></div></details>
+<details class="row"><summary><span class="no">35</span><span class="hd"><span class="t">21:54</span>무리뉴·제나토리, 우정힐스 그린피와 빈자리를 확인</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리 오빠가 우정힐스 그린피를 묻자 무리뉴 오빠가 비회원 기준 평일 21만 원, 주말 26만 원이라고 안내했어요. 10월 8일 두 자리가 비어 있다는 정보와 게스트 가능성도 함께 확인하면서 라운드 참여를 살펴봤네요.</p></div></details>
+  </section>
+
+  <section id="rounds" class="section"><div class="grid section-head"><span class="section-index">02</span><h2 class="section-title">오늘의 하이라이트</h2><p class="section-meta">Selected / 3</p></div><details class="row"><summary><span class="no">01</span><span class="hd">애플 아이폰 듀오, 혁신적인 화면과 300만~500만 원대 가격을 두고 갑론을박</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>멤버들이 애플 아이폰 듀오의 폴더블 화면 연출과 사용 연속성, 외부 화면, 반투명 애니메이션을 살펴보며 디자인과 소프트웨어 완성도를 높게 평가했어요. 맥세이프 지원 여부와 무게, 배터리, 저장용량, 애플케어·케이스 가격까지 따져보면서 갤럭시 폴드와 비교하는 이야기도 이어졌네요. 예쁘고 사고 싶다는 반응과 300만~500만 원대 가격은 부담스럽다는 반응이 함께 나왔어요.</p></div></details><details class="row"><summary><span class="no">02</span><span class="hd">굿해빗 소장님 생일 축하와 선착순 선물게임</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>굿해빗 소장님의 생일을 맞아 멤버들이 아침부터 축하 인사를 건넸고, 20일에 가볍게 자리를 마련하자는 이야기도 나왔어요. 이어 생일 기념 선착순 선물게임이 열리면서 여러 멤버가 빠르게 당첨 소식과 감사 인사를 남겼네요.</p></div></details><details class="row"><summary><span class="no">03</span><span class="hd">굿해빗 소장님의 생일 선착순 선물게임, 당첨 행렬</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>굿해빗 소장님이 생일 기념 선착순 선물게임을 열자 여러 멤버가 차례로 당첨됐어요. 감사 인사와 축하 이모지가 이어졌고, 종료를 앞두고도 참여자가 더해졌네요.</p></div></details></section>
+  <section id="sched" class="section"><div class="grid section-head"><span class="section-index">03</span><h2 class="section-title">다가오는 일정</h2><p class="section-meta">From the chat</p></div><ol class="sched"><li><span class="when"><b>-</b></span><span class="what">다가오는 일정 없음</span></li></ol></section>
+  <section id="links" class="section"><div class="grid section-head"><span class="section-index">04</span><h2 class="section-title">공유된 링크</h2><p class="section-meta">References / 18</p></div><ul class="links"><li><span class="t">유튜브</span><a href="https://youtube.com/shorts/_5xZOdqTpkw?si=nXYlwwj20Qh6tSyX" target="_blank" rel="noopener noreferrer nofollow"><b>아이폰 듀오 실물 공개</b><span>youtube.com</span></a><small>무리뉴</small></li><li><span class="t">유튜브</span><a href="https://youtu.be/FUfGcZ092b0?si=5j8gUzWYUJTQMvah" target="_blank" rel="noopener noreferrer nofollow"><b>애플 아이폰 듀오 소개</b><span>youtu.be</span></a><small>닼돌</small></li><li><span class="t">유튜브</span><a href="https://youtu.be/YqYehjqUJOo?si=knBzg94fy2ihgBMv" target="_blank" rel="noopener noreferrer nofollow"><b>한로로 ‘0+0’ 라이브 공연</b><span>youtu.be</span></a><small>냉라면</small></li><li><span class="t">유튜브</span><a href="https://youtu.be/f1sr0D13wEY?si=iARl1bC5XxCitmOe" target="_blank" rel="noopener noreferrer nofollow"><b>한로로 ‘사랑하게 될 거야’ 라이브</b><span>youtu.be</span></a><small>냉라면</small></li><li><span class="t">유튜브</span><a href="https://youtu.be/R6xudKrJXSU?si=Y3bTmA0sOr6Xrn3a" target="_blank" rel="noopener noreferrer nofollow"><b>한로로 ‘0+0’ 가사 의미</b><span>youtu.be</span></a><small>즐겨참기</small></li><li><span class="t">유튜브</span><a href="https://youtu.be/452qchfTy94?si=SitgGZ6aeXefZ5hU" target="_blank" rel="noopener noreferrer nofollow"><b>한로로 콘서트 라이브 공연</b><span>youtu.be</span></a><small>진독</small></li><li><span class="t">유튜브</span><a href="https://www.youtube.com/watch?v=9DeJJIJ_S2Y" target="_blank" rel="noopener noreferrer nofollow"><b>한로로 ‘0+0’ 리믹스 풀버전</b><span>www.youtube.com</span></a><small>배고파요</small></li><li><span class="t">블로그</span><a href="https://blog.naver.com/kongmistar/224307950981" target="_blank" rel="noopener noreferrer nofollow"><b>행복한 여행 동반자 콩미 블로그</b><span>blog.naver.com</span></a><small>무리뉴</small></li><li><span class="t">기타</span><a href="https://arca.live/b/baseball/182308584?p=1" target="_blank" rel="noopener noreferrer nofollow"><b>카리나 신체 관련 게시물</b><span>arca.live</span></a><small>제나토리</small></li><li><span class="t">기타</span><a href="https://m.ppomppu.co.kr/new/bbs_view.php?id=freeboard&amp;no=10109546" target="_blank" rel="noopener noreferrer nofollow"><b>카리나 관련 게시물 추가 논의</b><span>m.ppomppu.co.kr</span></a><small>닼돌</small></li><li><span class="t">커뮤니티</span><a href="https://aagag.com" target="_blank" rel="noopener noreferrer nofollow"><b>카리나 측면 모습 화제</b><span>aagag.com</span></a><small>닼돌</small></li><li><span class="t">기타</span><a href="https://news.samsung.com/kr/201g%EC%9D%98-%EB%B9%84%EB%B0%80-%EA%B0%A4%EB%9F%AD%EC%8B%9C-z-%ED%8F%B4%EB%93%9C8%EC%9D%B4-%EC%84%B8%EC%83%81%EC%97%90%EC%84%9C-%EA%B0%80%EC%9E%A5-%EA%B0%80%EB%B2%BC%EC%9A%B4-%ED%8F%B4" target="_blank" rel="noopener noreferrer nofollow"><b>갤럭시 Z 폴드8 초경량 설계 비밀</b><span>news.samsung.com</span></a><small>희야</small></li><li><span class="t">SNS</span><a href="https://www.instagram.com/p/DdFxGH3D1ZZ/?img_index=15&amp;stkn=MXFzZXh6ODNodnc4NQ==" target="_blank" rel="noopener noreferrer nofollow"><b>노현정 첫사랑의 현재 정치 활동</b><span>www.instagram.com</span></a><small>티비리</small></li><li><span class="t">유튜브</span><a href="https://youtu.be/Cu3nc_wI44U?si=RadJOLKDyRT6Swmn" target="_blank" rel="noopener noreferrer nofollow"><b>골프 첫 홀 ASMR과 선수 수다</b><span>youtu.be</span></a><small>아!럭키</small></li><li><span class="t">기타</span><a href="https://www.reddit.com/r/GalaxyFold/comments/1wcacld/tried_to_recreate_the_iphone_duo_animation_on_my/" target="_blank" rel="noopener noreferrer nofollow"><b>갤럭시 폴드로 아이폰 듀오 재현</b><span>www.reddit.com</span></a><small>제나토리</small></li><li><span class="t">유튜브</span><a href="https://youtube.com/shorts/IaMnFMurJbg?si=sVRMkQJlPzCY7BWo" target="_blank" rel="noopener noreferrer nofollow"><b>이재명 대통령 관련 유행 유머</b><span>youtube.com</span></a><small>숲속의바람</small></li><li><span class="t">SNS</span><a href="https://www.instagram.com/p/DdGho8VtWBj/?stkn=N3ppaHBwdnRhZGZ3" target="_blank" rel="noopener noreferrer nofollow"><b>브롬톤의 애플 폴더블 환영</b><span>www.instagram.com</span></a><small>백함</small></li><li><span class="t">기타</span><a href="https://whcc.kolon.co.kr/_mobile/index.asp" target="_blank" rel="noopener noreferrer nofollow"><b>코오롱 관련 모바일 페이지</b><span>whcc.kolon.co.kr</span></a><small>무리뉴</small></li></ul></section>
+
+  <section id="gift" class="section">
+    <div class="grid section-head"><span class="section-index">05</span><h2 class="section-title">선물 기록</h2><p class="section-meta">Give &amp; take</p></div>
+    <div class="grid split"><div class="col"><h3>오늘 쏜 사람</h3><ol class="lst"><li><span class="rk">1회</span><span>행맨</span></li><li><span class="rk">1회</span><span>굿해빗</span></li><li><span class="rk">1회</span><span>Andrew Choe</span></li></ol></div><div class="col"><h3>오늘 받은 사람</h3><ol class="lst"><li><span class="rk">2건</span><span>티비리</span></li><li><span class="rk">2건</span><span>차분히</span></li><li><span class="rk">2건</span><span>진꾼</span></li><li><span class="rk">2건</span><span>제나토리</span></li><li><span class="rk">2건</span><span>재스퍼</span></li><li><span class="rk">2건</span><span>올드헤드</span></li><li><span class="rk">2건</span><span>숲속의바람</span></li><li><span class="rk">2건</span><span>복실</span></li><li><span class="rk">2건</span><span>벼갈</span></li><li><span class="rk">2건</span><span>닼돌</span></li></ol></div></div>
+    <div class="grid split mtop"><div class="col"><h3>이번달 쏜 사람 <span class="tag">Top 5</span></h3><ol class="lst"><li><span class="rk">5회</span><span>제나토리</span></li><li><span class="rk">4회</span><span>지오</span></li><li><span class="rk">4회</span><span>아!럭키</span></li><li><span class="rk">3회</span><span>달파란</span></li><li><span class="rk">2회</span><span>클스웨버</span></li></ol></div><div class="col"><h3>이번달 받은 사람 <span class="tag">Top 5</span></h3><ol class="lst"><li><span class="rk">30건</span><span>즐겨참기</span></li><li><span class="rk">29건</span><span>복실</span></li><li><span class="rk">25건</span><span>진독</span></li><li><span class="rk">24건</span><span>달파란</span></li><li><span class="rk">21건</span><span>차분히</span></li></ol></div></div>
+  </section>
+
+  <section id="talk" class="section">
+    <div class="grid section-head"><span class="section-index">06</span><h2 class="section-title">토크 기여자</h2><p class="section-meta">Messages ranked</p></div>
+    <div class="bars"><div class="bar podium1"><span class="crown" title="1등" aria-label="1등">👑</span><span class="nm">제나토리</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">118</span></div><div class="bar podium2"><span class="rank r2">2</span><span class="nm">무리뉴</span><span class="track"><span class="fill" style="width:82.2%"></span></span><span class="v">97</span></div><div class="bar podium3"><span class="rank r3">3</span><span class="nm">진독</span><span class="track"><span class="fill" style="width:72.9%"></span></span><span class="v">86</span></div><div class="bar podium0"><span class="rank r0">4</span><span class="nm">불법</span><span class="track"><span class="fill" style="width:58.5%"></span></span><span class="v">69</span></div><div class="bar podium0"><span class="rank r0">5</span><span class="nm">닼돌</span><span class="track"><span class="fill" style="width:55.9%"></span></span><span class="v">66</span></div><div class="bar podium0"><span class="rank r0">6</span><span class="nm">한국용</span><span class="track"><span class="fill" style="width:49.2%"></span></span><span class="v">58</span></div><div class="bar podium0"><span class="rank r0">7</span><span class="nm">냉라면</span><span class="track"><span class="fill" style="width:48.3%"></span></span><span class="v">57</span></div><div class="bar podium0"><span class="rank r0">8</span><span class="nm">내곰</span><span class="track"><span class="fill" style="width:39.8%"></span></span><span class="v">47</span></div><div class="bar podium0"><span class="rank r0">9</span><span class="nm">데카르트</span><span class="track"><span class="fill" style="width:38.1%"></span></span><span class="v">45</span></div><div class="bar podium0"><span class="rank r0">10</span><span class="nm">아!럭키</span><span class="track"><span class="fill" style="width:36.4%"></span></span><span class="v">43</span></div><div class="bar podium0"><span class="rank r0">11</span><span class="nm">희야</span><span class="track"><span class="fill" style="width:35.6%"></span></span><span class="v">42</span></div><div class="bar podium0"><span class="rank r0">12</span><span class="nm">행맨</span><span class="track"><span class="fill" style="width:30.5%"></span></span><span class="v">36</span></div><div class="bar podium0"><span class="rank r0">13</span><span class="nm">코프</span><span class="track"><span class="fill" style="width:27.1%"></span></span><span class="v">32</span></div><div class="bar podium0"><span class="rank r0">14</span><span class="nm">백함</span><span class="track"><span class="fill" style="width:25.4%"></span></span><span class="v">30</span></div><div class="bar podium0"><span class="rank r0">15</span><span class="nm">히즈히즈</span><span class="track"><span class="fill" style="width:24.6%"></span></span><span class="v">29</span></div></div>
+    <div class="mtop"><h3 class="kicker">이번달 누적 · Top 10</h3><div class="bars"><div class="bar podium1"><span class="crown" title="1등" aria-label="1등">👑</span><span class="nm">무리뉴</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">1130</span></div><div class="bar podium2"><span class="rank r2">2</span><span class="nm">행맨</span><span class="track"><span class="fill" style="width:86.3%"></span></span><span class="v">975</span></div><div class="bar podium3"><span class="rank r3">3</span><span class="nm">제나토리</span><span class="track"><span class="fill" style="width:80.3%"></span></span><span class="v">907</span></div><div class="bar podium0"><span class="rank r0">4</span><span class="nm">진독</span><span class="track"><span class="fill" style="width:73.3%"></span></span><span class="v">828</span></div><div class="bar podium0"><span class="rank r0">5</span><span class="nm">닼돌</span><span class="track"><span class="fill" style="width:61.5%"></span></span><span class="v">695</span></div><div class="bar podium0"><span class="rank r0">6</span><span class="nm">냉라면</span><span class="track"><span class="fill" style="width:60.1%"></span></span><span class="v">679</span></div><div class="bar podium0"><span class="rank r0">7</span><span class="nm">내곰</span><span class="track"><span class="fill" style="width:58.2%"></span></span><span class="v">658</span></div><div class="bar podium0"><span class="rank r0">8</span><span class="nm">즐겨참기</span><span class="track"><span class="fill" style="width:57.3%"></span></span><span class="v">647</span></div><div class="bar podium0"><span class="rank r0">9</span><span class="nm">Andrew Choe</span><span class="track"><span class="fill" style="width:53.0%"></span></span><span class="v">599</span></div><div class="bar podium0"><span class="rank r0">10</span><span class="nm">희야</span><span class="track"><span class="fill" style="width:49.2%"></span></span><span class="v">556</span></div></div></div>
+  </section>
+
+  <nav class="archive grid" aria-label="이전 요약">
+    <h2 class="archive-title">이전 요약 보기</h2>
+    <div class="pn"><a class="pv" href="../2026-09-09/"><small>← Previous</small><b>9월 9일(수)</b></a><span class="nx"><small>Next →</small><b>9월 11일(금)</b></span></div>
+    <div class="chips"><a href="../2026-09-21/">9월 21일(월)</a><a href="../2026-09-20/">9월 20일(일)</a><a href="../2026-09-19/">9월 19일(토)</a><a href="../2026-09-18/">9월 18일(금)</a><a href="../2026-09-17/">9월 17일(목)</a></div><a class="all" href="../archive/">전체 목록 · 181일 →</a>
+  </nav>
+  <footer class="foot"><span>2026-09-10</span><span>다인이가 정리했어요 · 오빠들 오늘도 고생하셨어요 💛</span></footer>
+</div>
+<script>
+(function () {
+  var KEY = 'kbundang-theme';
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.theme-switch button');
+  function apply(mode) {
+    if (mode === 'light' || mode === 'dark') { root.setAttribute('data-theme', mode); }
+    else { root.removeAttribute('data-theme'); mode = 'system'; }
+    buttons.forEach(function (b) { b.classList.toggle('on', b.dataset.themeChoice === mode); });
+  }
+  var saved = localStorage.getItem(KEY) || 'system';
+  apply(saved);
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var mode = b.dataset.themeChoice;
+      localStorage.setItem(KEY, mode);
+      apply(mode);
+    });
+  });
+})();
+</script>
+</body>
+</html>

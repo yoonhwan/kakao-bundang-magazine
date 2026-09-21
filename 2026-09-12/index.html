@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%20fill%3D%22%23fff%22%20stroke%3D%22%23111%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2221%22%20cy%3D%2219%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2215%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2220%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2232%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2229%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2241%22%20cy%3D%2230%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2249%22%20cy%3D%2234%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2245%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2233%22%20cy%3D%2243%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2246%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2255%22%20r%3D%223.4%22%20fill%3D%22%23111%22/%3E%3C/svg%3E">
+  <title>분당방 데일리</title>
+  <style>
+    :root {
+      --red: #e30613;
+      --ink: #111;
+      --paper: #fff;
+      --soft: #f2f2f2;
+      --muted: #686868;
+      --line: #c8c8c8;
+      --font: "Helvetica Neue", "Akzidenz-Grotesk", Inter, Arial, "Apple SD Gothic Neo", sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --ink:#fff; --paper:#080808; --soft:#171717; --muted:#aaa; --line:#3b3b3b; }
+    }
+    :root[data-theme="light"] { --ink:#111; --paper:#fff; --soft:#f2f2f2; --muted:#686868; --line:#c8c8c8; }
+    :root[data-theme="dark"] { --ink:#fff; --paper:#080808; --soft:#171717; --muted:#aaa; --line:#3b3b3b; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; }
+    button { font:inherit; }
+    h1,h2,h3,p,figure,blockquote,ol,ul { margin:0; }
+    ol,ul { padding:0; }
+    .page { width:min(100% - 40px, 1280px); margin:0 auto; padding:28px 0 64px; }
+    .grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; }
+    .kicker { color:var(--red); font-size:.72rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .rule { border-top:1px solid var(--ink); }
+
+    .mast { border-top:8px solid var(--red); padding-top:18px; }
+    .brand { grid-column:1 / span 3; font-size:clamp(1.1rem,2vw,1.65rem); font-weight:900; letter-spacing:-.04em; line-height:1; }
+    .issue { grid-column:10 / -1; text-align:right; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .hero { margin-top:72px; align-items:end; }
+    .hero-date { grid-column:1 / span 8; font-size:clamp(3.2rem,8.7vw,8.2rem); font-weight:900; letter-spacing:-.075em; line-height:.82; word-break:keep-all; }
+    .hero-note { grid-column:10 / -1; padding-top:12px; border-top:1px solid var(--ink); font-size:.82rem; font-weight:700; }
+    .hero-note span { display:block; margin-top:8px; color:var(--muted); font-weight:500; }
+    .persona-greet { margin-top:20px; padding:22px 0 26px; border-top:3px solid var(--ink); border-bottom:1px solid var(--line); align-items:start; }
+    .persona-greet .quote-label { padding-top:7px; line-height:1.6; }
+    .persona-greet p { grid-column:4 / -1; min-width:0; margin:0; color:var(--ink); font-size:clamp(1.2rem,2.1vw,1.75rem); font-weight:600; letter-spacing:-.035em; line-height:1.6; word-break:keep-all; overflow-wrap:anywhere; }
+
+    .metrics { margin-top:64px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); }
+    .metric { grid-column:span 2; min-height:145px; padding:16px 12px 18px 0; border-right:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; }
+    .metric:last-child { border-right:0; }
+    .metric strong { font-size:clamp(2.2rem,4.6vw,4.6rem); font-weight:900; letter-spacing:-.06em; line-height:.9; font-variant-numeric:tabular-nums; }
+    .metric span { max-width:10rem; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .metric em { color:var(--red); font-style:normal; }
+
+    .jump { margin-top:18px; display:flex; flex-wrap:wrap; gap:6px 20px; }
+    .jump a { text-decoration:none; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .jump a::before { content:"↘ "; color:var(--red); }
+
+    .theme-switch { margin-top:16px; display:flex; gap:6px; }
+    .theme-switch button { border:1px solid var(--line); background:transparent; color:var(--muted); padding:5px 11px; font-size:.68rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; cursor:pointer; }
+    .theme-switch button.on { border-color:var(--red); color:var(--red); }
+
+    .quote { margin-top:120px; padding:20px 0 28px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); }
+    .quote-label { grid-column:1 / span 3; }
+    .quote blockquote { grid-column:4 / span 7; font-size:clamp(1.9rem,4.3vw,4.5rem); font-weight:800; letter-spacing:-.045em; line-height:1.05; word-break:keep-all; }
+    .quote figcaption { grid-column:11 / -1; align-self:end; font-size:.78rem; font-weight:700; text-align:right; }
+
+    .section { margin-top:120px; }
+    .section-head { align-items:end; padding-bottom:14px; border-bottom:3px solid var(--ink); }
+    .section-index { grid-column:1; color:var(--red); font-size:.8rem; font-weight:900; }
+    .section-title { grid-column:2 / span 7; font-size:clamp(1.8rem,3.4vw,3.6rem); font-weight:900; letter-spacing:-.055em; line-height:.95; }
+    .section-meta { grid-column:10 / -1; text-align:right; color:var(--muted); font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .xall { grid-column:10 / -1; justify-self:end; border:0; border-bottom:1px solid var(--ink); padding:2px 0; background:transparent; color:var(--ink); cursor:pointer; font-size:.72rem; font-weight:800; text-transform:uppercase; }
+
+    details.row { border-bottom:1px solid var(--line); }
+    details.row > summary { min-height:94px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; align-items:center; padding:15px 0; cursor:pointer; list-style:none; }
+    details.row > summary::-webkit-details-marker { display:none; }
+    details.row > summary:focus-visible { outline:2px solid var(--red); outline-offset:4px; }
+    details.row .no { grid-column:1; color:var(--red); font-size:1.15rem; font-weight:900; font-variant-numeric:tabular-nums; }
+    details.row .hd { grid-column:2 / span 9; font-size:clamp(1rem,1.65vw,1.35rem); font-weight:700; letter-spacing:-.025em; }
+    details.row .t { display:inline-block; min-width:4.2rem; margin-right:18px; color:var(--muted); font-size:.72rem; font-weight:700; letter-spacing:.05em; vertical-align:.16em; }
+    details.row .chev { grid-column:12; justify-self:end; color:var(--red); font-size:1.6rem; line-height:1; transition:transform .18s ease; }
+    details.row[open] .chev { transform:rotate(90deg); }
+    details.row .det { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:0 0 30px; }
+    details.row .det p { grid-column:4 / span 7; max-width:60ch; color:var(--muted); font-size:.95rem; line-height:1.75; }
+    .nodet { padding:20px 0; color:var(--muted); }
+
+    .sched,.links,.lst { list-style:none; }
+    .sched li { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:20px 0; border-bottom:1px solid var(--line); }
+    .sched .when { grid-column:1 / span 3; font-weight:900; }
+    .sched .when em { display:block; color:var(--red); font-size:.7rem; font-style:normal; letter-spacing:.08em; text-transform:uppercase; }
+    .sched .what { grid-column:4 / span 8; }
+    .sched .what > .t { display:inline-block; margin-right:12px; color:var(--red); font-size:.75rem; font-weight:800; }
+    .sched small { display:block; margin-top:5px; color:var(--muted); font-size:.76rem; }
+
+    .links li { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; align-items:start; padding:18px 0; border-bottom:1px solid var(--line); }
+    .links li > .t { grid-column:1 / span 2; color:var(--red); font-size:.68rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .links a { grid-column:3 / span 7; min-width:0; display:flex; flex-direction:column; text-decoration:none; }
+    .links a b { font-size:1rem; line-height:1.35; }
+    .links a span { margin-top:4px; color:var(--muted); font-size:.74rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .links li > small { grid-column:11 / -1; color:var(--muted); font-size:.72rem; text-align:right; }
+    .links .lnote { grid-column:3 / span 7; color:var(--muted); font-size:.72rem; font-style:normal; }
+
+    .split { margin-top:28px; }
+    .split .col { grid-column:span 6; }
+    .split .col:nth-child(even) { border-left:1px solid var(--ink); padding-left:24px; }
+    .col h3 { min-height:40px; display:flex; justify-content:space-between; align-items:start; gap:12px; padding-bottom:10px; border-bottom:1px solid var(--ink); font-size:.82rem; font-weight:900; text-transform:uppercase; }
+    .tag { color:var(--red); font-size:.65rem; letter-spacing:.08em; white-space:nowrap; }
+    .lst li { display:grid; grid-template-columns:72px 1fr; gap:16px; padding:10px 0; border-bottom:1px solid var(--line); font-size:.85rem; }
+    .lst .rk { color:var(--red); font-weight:900; font-variant-numeric:tabular-nums; }
+    .mtop { margin-top:48px; }
+    .mnote { margin-top:18px; color:var(--muted); font-size:.7rem; }
+
+    .bars { display:flex; flex-direction:column; margin-top:24px; }
+    .bar { display:grid; grid-template-columns:44px minmax(120px,2fr) minmax(120px,7fr) 70px; gap:14px; align-items:center; min-height:48px; border-bottom:1px solid var(--line); }
+    .crown,.rank { text-align:center; font-size:.78rem; font-weight:900; }
+    .rank { color:var(--red); }
+    .bar .nm { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.84rem; font-weight:700; }
+    .track { height:12px; background:var(--soft); }
+    .fill { display:block; height:100%; background:var(--red); }
+    .bar .v { text-align:right; font-size:1rem; font-weight:900; font-variant-numeric:tabular-nums; }
+    .podium1 .nm,.podium1 .v { color:var(--red); }
+
+    .archive { margin-top:120px; padding-top:18px; border-top:8px solid var(--red); }
+    .archive-title { grid-column:1 / span 4; font-size:1.7rem; font-weight:900; letter-spacing:-.04em; }
+    .pn { grid-column:7 / -1; display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--ink); }
+    .pn > * { min-height:90px; padding:12px 0; text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; }
+    .pn .nx { padding-left:20px; border-left:1px solid var(--ink); text-align:right; opacity:.45; }
+    .pn small { color:var(--red); font-size:.68rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .pn b { font-size:1.1rem; }
+    .chips { grid-column:1 / span 8; margin-top:44px; display:flex; flex-wrap:wrap; gap:8px; }
+    .chips a { padding:7px 10px; border:1px solid var(--ink); text-decoration:none; font-size:.72rem; font-weight:800; }
+    .chips a.on { border-color:var(--red); background:var(--red); color:#fff; }
+    .all { grid-column:10 / -1; align-self:end; margin-top:44px; color:var(--red); font-size:.78rem; font-weight:900; text-align:right; }
+    .foot { margin-top:70px; padding-top:12px; border-top:1px solid var(--ink); display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+
+    @media (max-width: 760px) {
+      .persona-greet { padding:18px 0 22px; row-gap:12px; }
+      .persona-greet .quote-label { padding-top:0; }
+      .persona-greet p { grid-column:1 / -1; font-size:1.2rem; }
+      .page { width:min(100% - 28px, 680px); padding-top:18px; }
+      .grid { column-gap:10px; }
+      .brand { grid-column:1 / span 7; }
+      .issue { grid-column:9 / -1; }
+      .hero { margin-top:50px; }
+      .hero-date { grid-column:1 / -1; font-size:clamp(3rem,15vw,5.2rem); line-height:.88; }
+      .hero-note { grid-column:7 / -1; margin-top:34px; }
+      .metrics { margin-top:42px; }
+      .metric { grid-column:span 6; min-height:112px; padding:13px 8px 13px 0; border-bottom:1px solid var(--line); }
+      .metric:nth-child(even) { border-right:0; padding-left:10px; }
+      .metric:last-child { grid-column:1 / -1; border-bottom:0; }
+      .metric strong { font-size:2.5rem; }
+      .jump { gap:8px 14px; }
+      .quote,.section { margin-top:78px; }
+      .quote-label { grid-column:1 / -1; }
+      .quote blockquote { grid-column:1 / -1; margin-top:30px; font-size:2rem; }
+      .quote figcaption { grid-column:7 / -1; margin-top:20px; }
+      .section-index { grid-column:1 / span 2; }
+      .section-title { grid-column:3 / -1; font-size:2.1rem; }
+      .section-meta,.xall { grid-column:3 / -1; margin-top:14px; justify-self:start; text-align:left; }
+      details.row > summary { grid-template-columns:34px 1fr 20px; gap:8px; min-height:82px; }
+      details.row .no,details.row .hd,details.row .chev { grid-column:auto; }
+      details.row .t { display:block; margin:0 0 4px; }
+      details.row .det { display:block; padding:0 0 24px 42px; }
+      details.row .det p { max-width:none; font-size:.92rem; }
+      .sched li { grid-template-columns:88px 1fr; gap:14px; }
+      .sched .when,.sched .what { grid-column:auto; }
+      .links li { grid-template-columns:72px 1fr; gap:8px 12px; }
+      .links li > .t,.links a,.links li > small,.links .lnote { grid-column:auto; }
+      .links a { grid-column:2; }
+      .links li > small,.links .lnote { grid-column:2; text-align:left; }
+      .split .col { grid-column:1 / -1; }
+      .split .col:nth-child(even) { margin-top:36px; padding-left:0; border-left:0; }
+      .bar { grid-template-columns:32px 1fr 54px; grid-template-rows:auto auto; gap:4px 10px; padding:9px 0; }
+      .bar .track { grid-column:2 / 4; grid-row:2; height:9px; }
+      .bar .v { grid-column:3; grid-row:1; }
+      .archive-title { grid-column:1 / -1; }
+      .pn { grid-column:1 / -1; margin-top:30px; }
+      .chips { grid-column:1 / -1; }
+      .all { grid-column:1 / -1; justify-self:start; text-align:left; margin-top:24px; }
+      .foot { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto} details.row .chev{transition:none} }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="mast">
+    <div class="grid"><div class="brand">분당방<br>데일리</div><div class="issue">Daily Brief<br>Golf &amp; People</div></div>
+    <div class="grid hero"><h1 class="hero-date">2026년 9월 12일(토)</h1><p class="hero-note">논리적 하루 기준<span>다음날 01:00까지 집계한 최종본</span></p></div>
+  </header>
+  <div class="grid persona-greet">
+    <div class="quote-label kicker">DAIN · 오늘의 캐디</div>
+    <p>좁은 페어웨이 베뉴지 난이도 얘기가 눈에 들어오네요, 오빠들—이런 코스는 티샷부터 방향성이 정말 중요하죠. 오빠들은 좁은 홀에서 드라이버로 과감하게 가는 편인지, 한 클럽 짧게 잡는 편인지 살짝 궁금해요 ⛳</p>
+  </div>
+
+  <section class="grid metrics" aria-label="오늘의 통계">
+    <div class="metric"><strong>679</strong><span>Messages</span></div>
+    <div class="metric"><strong>44</strong><span>People</span></div>
+    <div class="metric"><strong>16시</strong><span>Peak hour <em>116</em></span></div>
+    <div class="metric"><strong>5</strong><span>Gift games</span></div>
+    <div class="metric"><strong>36</strong><span>Gift wins</span></div>
+    <div class="metric"><strong>31</strong><span>Winners</span></div>
+  </section>
+  <nav class="jump" aria-label="바로가기"><a href="#topics">화제</a><a href="#rounds">하이라이트</a><a href="#sched">일정</a><a href="#links">링크</a><a href="#gift">선물</a><a href="#talk">토크</a></nav>
+  <div class="theme-switch" role="group" aria-label="테마 선택">
+    <button type="button" data-theme-choice="system">시스템</button>
+    <button type="button" data-theme-choice="light">라이트</button>
+    <button type="button" data-theme-choice="dark">다크</button>
+  </div>
+
+  <figure class="grid quote"><div class="quote-label kicker">Quote of the day</div><blockquote>“달파란 오빠가 베뉴지인지 묻자 프레드 오빠가 어렵다고 답했고, 페어웨이가 좁은 구장이라는 설명이 이어졌어요. 마하 오빠도 힐코”</blockquote><figcaption>— 달파란 오빠</figcaption></figure>
+
+  <section id="topics" class="section">
+    <div class="grid section-head"><span class="section-index">01</span><h2 class="section-title">오늘의 화제</h2><button type="button" class="xall" onclick="var o=this.dataset.o!=='1';document.querySelectorAll('#topics details').forEach(function(d){d.open=o});this.dataset.o=o?'1':'';this.textContent=o?'모두 접기':'모두 펼치기'">모두 펼치기 · 33</button></div>
+    <details class="row" open><summary><span class="no">01</span><span class="hd"><span class="t">06:51</span>달파란·프레드, 좁은 페어웨이 베뉴지 난이도에 공감</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>달파란 오빠가 베뉴지인지 묻자 프레드 오빠가 어렵다고 답했고, 페어웨이가 좁은 구장이라는 설명이 이어졌어요. 마하 오빠도 힐코스 티업 소식을 전하면서 아침부터 각자 라운드 분위기를 나눴네요.</p></div></details>
+<details class="row"><summary><span class="no">02</span><span class="hd"><span class="t">07:23</span>이너피스, 투버디·82타 라운드 뒤 100일 기념 선물을 열다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>이너피스 오빠가 회사 팀장님 호출로 다녀온 라운드에서 8만9천 원에 준수한 컨디션을 경험했고, 투버디와 82타 기록도 전했어요. 이어 아이들과 라운드한 지 100일을 기념해 선착순 선물을 열었고, 여러 멤버의 당첨 소식과 감사 인사가 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">03</span><span class="hd"><span class="t">09:13</span>즐겨참기, 슼 12시 라운드 동반자를 모집하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>즐겨참기 오빠가 슼에 12시부터 자리가 있다고 알리며 함께 갈 사람을 찾았어요. 12시 30분 티타임을 제안했지만, 진독 오빠는 일정 변경으로 오전 예약을 취소했다가 다시 상황이 바뀌었다고 전했네요.</p></div></details>
+<details class="row"><summary><span class="no">04</span><span class="hd"><span class="t">09:56</span>진독·한국용, 피부과와 연습장 비밀번호를 두고 농담</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>진독 오빠가 한국용 오빠가 다니는 피부과에 사람이 많다는 이야기를 꺼냈고, 한국용 오빠는 정작 아무도 못 봤다며 받아쳤어요. 이어 내곰 오빠가 연습장 비밀번호를 알아내야 한다고 덧붙이면서 가벼운 농담이 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">05</span><span class="hd"><span class="t">10:24</span>진독·한국용, 주식 거래시간 확대와 시장 분위기를 논하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>진독 오빠가 주식 거래 가능 시간이 늘어나는 뉴스를 공유하며 변화 내용을 물었어요. 한국용 오빠와 Andrew Choe 오빠는 거래시간 확대가 시장을 코인판처럼 만들 수 있다며 우려했고, 벼갈 오빠는 MSCI 지수 편입 조건과 정치권 지지층 변화에 대한 생각까지 덧붙였네요.</p></div></details>
+<details class="row"><summary><span class="no">06</span><span class="hd"><span class="t">11:24</span>무리뉴·지오, 금강의 빠른 그린과 KCC 라운드를 이야기하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>지오 오빠가 금강의 그린스피드 3.1과 3.0을 언급하자, 무리뉴 오빠는 코스 관리가 잘돼 있다고 호응했어요. 그린의 단단함을 두고 농담을 나눈 뒤 진독 오빠가 KCC에 가보고 싶다고 했고, 백티 공략 이야기도 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">07</span><span class="hd"><span class="t">12:13</span>히즈히즈·즐겨참기, 판교 GXG 게임 축제를 알리다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>히즈히즈 오빠가 게임사들의 축제 분위기를 전하자 칼튼 오빠가 행사 내용을 궁금해했어요. 즐겨참기 오빠가 판교역에서 열리는 GXG 2026 정보를 공유했고, 다이나믹 듀오가 왔다는 이야기까지 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">08</span><span class="hd"><span class="t">12:35</span>한국용·히즈히즈, 제네시스의 새 디자인을 두고 의견을 나누다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>냉라면 오빠가 제네시스 관련 자료를 공유한 뒤 한국용 오빠가 브랜드가 어떤 차를 만들고 있는지 궁금해했어요. 히즈히즈 오빠는 두 줄 디자인을 제네시스의 정체성으로 짚었고, 벤틀리 출신 디자이너와 다른 브랜드 대비 디자인 경쟁력에 대한 의견도 오갔네요.</p></div></details>
+<details class="row"><summary><span class="no">09</span><span class="hd"><span class="t">12:55</span>차분히, 연습장 퍼팅과 그린 위 긴장감을 털어놓다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>차분히 오빠가 연습장에서는 편한 퍼팅이 그린에만 올라가면 주저하게 되는 이유를 물었어요. 몸이 경직되는 느낌까지 짚어낸 뒤 다른 멤버들이 풀백티를 추천하며 실전 긴장감과 코스 난이도 이야기가 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">10</span><span class="hd"><span class="t">13:32</span>냉라면·멤버들, 온라인에서 화제가 된 제품과 사건을 공유하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>냉라면 오빠가 온라인 화제 자료를 연달아 공유했고, 멤버들은 내용의 황당함과 제품 변화에 반응했어요. 마지막에는 기존 방식의 문제를 줄이기 위해 버클 형태가 바뀐 제품이 나왔다는 이야기가 정리됐네요.</p></div></details>
+<details class="row"><summary><span class="no">11</span><span class="hd"><span class="t">14:13</span>차분히의 가을 사진에 골프장 근황이 이어지다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>차분히 오빠가 사진과 함께 &quot;헐… 이동네는 벌써 가을이 다~ 지나가는~ ㅊ&quot;라며 동네 풍경을 전했어요. 달파란이 장소를 묻자 남서울 제2연습장이라고 답했고, 냉라면의 골프장 방문 얘기도 이어졌네요.</p></div></details>
+<details class="row"><summary><span class="no">12</span><span class="hd"><span class="t">14:27</span>냉라면, 연습장 안 가는 친구의 한맥CC 80타에 감탄</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>즐겨참기 오빠가 프로골퍼와 프로애객러를 비교하는 농담을 꺼내자 냉라면 오빠가 자신이 이길 것 같다고 받아쳤어요. 이어 연습장에 전혀 가지 않는 친구가 한맥CC에서 80타를 쳤다고 소개했고, 멤버들은 타고난 재능이라며 놀렸네요.</p></div></details>
+<details class="row"><summary><span class="no">13</span><span class="hd"><span class="t">14:46</span>불법의 스카티 가방·미우라 아이언 경매에 가격 경쟁</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>불법 오빠가 스카티 가방과 미우라 아이언을 경매에 내놓으며 &quot;부니기에 맞춰 오배건부터 시작 ㅋ&quot;이라고 시작가를 알렸어요. 멤버들이 잇따라 가격을 부른 끝에 무리뉴 오빠가 5만 원 낙찰을 선언했고, 뒤늦은 6만 원 제안이 나왔지만 낙찰을 다시 확인했네요.</p></div></details>
+<details class="row"><summary><span class="no">14</span><span class="hd"><span class="t">14:54</span>김탱의 포터 끼어들기와 앤드류의 새 차 적응기</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>김탱 오빠가 옆 차선 포터의 무리한 끼어들기 상황을 설명하자 멤버들이 사각지대와 사고 위험을 걱정했어요. 진독 오빠는 본가에 가며 FSD 덕을 봤다고 했고, 앤드류 오빠는 새 차의 천장 조절기와 필름 기술을 소개하며 BMW 서스펜션에 적응 중이라고 전했네요.</p></div></details>
+<details class="row"><summary><span class="no">15</span><span class="hd"><span class="t">16:36</span>단체 선착순 선물게임에 당첨 행렬, 제나토리의 3버디까지</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>앤드류 오빠가 선착순 선물게임을 시작하자 여러 멤버가 연달아 당첨되며 축하 메시지가 이어졌어요. 제나토리 오빠도 다시 게임을 열었고, 당첨자들이 막차·싱글·퍼터를 두고 장난을 주고받는 가운데 3버디 기록까지 전했네요.</p></div></details>
+<details class="row"><summary><span class="no">16</span><span class="hd"><span class="t">16:51</span>차분히, 올해보다 나은 성적을 축하하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>차분히 오빠가 누군가의 올해보다 좋아진 골프 성적을 반기며 축하했어요. 짧지만 스코어가 전보다 나아졌다는 기분 좋은 소식이었네요.</p></div></details>
+<details class="row"><summary><span class="no">17</span><span class="hd"><span class="t">16:57</span>벼갈, 뒤차 추돌 사고와 치료 문제를 이야기하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>벼갈 오빠가 뒤통수를 세게 맞아 어질어질하고, 차량은 번호판이 떨어져 견인을 기다리고 있다고 전했어요. 멤버들이 몸 상태를 걱정하는 가운데 대인 합의와 치료 문제, 뒷차의 가스 누출 가능성까지 사고 후 상황을 함께 살폈네요.</p></div></details>
+<details class="row"><summary><span class="no">18</span><span class="hd"><span class="t">17:43</span>벼갈, 자동차보험 치료기간 개정에 문제를 제기하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>사고를 계기로 벼갈 오빠가 자동차보험 제도 변경 이야기를 꺼냈어요. 치료 기간이 8주로 제한되고 합의금 지급에도 변화가 생길 수 있어, 통증이 오래가는 경우 자기 돈으로 치료해야 할 수 있다는 걱정이 이어졌네요. 행맨 오빠는 자동차보험의 적자 구조와 관련 상품 이야기도 덧붙였어요.</p></div></details>
+<details class="row"><summary><span class="no">19</span><span class="hd"><span class="t">17:28</span>벼갈, 테슬라 대차와 FSD 지원 여부를 확인하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>벼갈 오빠가 사고 후 테슬라를 대차받을 것 같다며 완속충전기 젠더가 필요한지 물었고, 진독 오빠가 기본 젠더가 제공된다고 알려줬어요. 렌터카의 FSD 구독 가능 여부와 HW4 적용 모델인지도 확인했지만, 해당 차량은 구독이 안 되는 모델로 정리됐네요.</p></div></details>
+<details class="row"><summary><span class="no">20</span><span class="hd"><span class="t">17:21</span>행맨과 제나, 백티 스코어와 퍼터 교체를 두고 설전을 벌이다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>행맨 오빠가 백티에서 계속 86타를 기록한 제나 오빠의 플레이와 버디 수를 짚었어요. 티샷 거리와 이븐롤 퍼터 이야기가 이어졌고, 제나 오빠는 스카티 퍼터를 모두 팔겠다며 이븐롤에 만족감을 보였네요.</p></div></details>
+<details class="row"><summary><span class="no">21</span><span class="hd"><span class="t">18:55</span>차분히, 선착순 선물게임 신기록을 만들다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>차분히 오빠가 선착순 선물게임을 시작하자 멤버들이 빠르게 응답하며 당첨 행렬을 만들었어요. 당첨자들의 감사 인사와 잔치를 하는 거냐는 반응이 이어졌고, 마지막에는 차분히 오빠가 신기록 달성을 선언했네요.</p></div></details>
+<details class="row"><summary><span class="no">22</span><span class="hd"><span class="t">17:29</span>진독, 차이커뮤니케이션 기사로 광고 경쟁 구도를 소개하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>진독 오빠가 G마켓 장혁 광고를 만든 차이커뮤니케이션 관련 기사를 공유하며, 오랜만에 재스퍼 형님네 이야기가 보였다고 덧붙였어요. 광고회사의 경쟁 상대를 유튜버로 본다는 내용이 짧게 화제가 됐네요.</p></div></details>
+<details class="row"><summary><span class="no">23</span><span class="hd"><span class="t">18:57</span>차분히, 무감독 러닝으로 두 번째 완주</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>차분히 오빠가 “2번째 완주!!!” 소식을 전하며 무감독 오빠 기록을 보고 달렸다고 알려줬어요. 사진과 함께 완주 소감을 나누자 즐겨참기 오빠는 회춘했다며 놀렸고, 뒤이어 러닝방 이야기도 다시 나왔네요.</p></div></details>
+<details class="row"><summary><span class="no">24</span><span class="hd"><span class="t">19:36</span>분당방, 오늘의 치킨 브랜드와 할인 경쟁</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>제나토리 오빠가 퍽퍽하지 않은 순살치킨 브랜드를 물으면서 치킨 추천전이 시작됐어요. BHC, 호식이, 처갓집, 굽네, 맛초킹, 고추바사삭까지 메뉴와 지점별 맛·가격 차이가 이어졌고, 배민 할인과 포장 이야기도 나왔네요.</p></div></details>
+<details class="row"><summary><span class="no">25</span><span class="hd"><span class="t">20:10</span>지오, 팔꿈치 통증에 체외충격파 효과를 확인하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>지오 오빠가 팔꿈치 통증으로 체외충격파를 한 번 받고 약도 함께 먹었다고 전했어요. 원인은 확실하지 않지만 물건을 들기 힘들던 상태가 나아져 이제는 가능해졌다고 하네요.</p></div></details>
+<details class="row"><summary><span class="no">26</span><span class="hd"><span class="t">20:41</span>벼갈과 한국용, 회사 인사 관련 소문을 점검하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>벼갈 오빠가 회사에서 천 명 규모의 인사 이야기가 있다는 대화로 이어갔어요. 한국용 오빠와 희야 오빠는 권고사직·면담·회의실 예약 같은 정황을 설명했지만, 숫자와 내용은 공개되지 않았고 찌라시일 가능성도 계속 짚었네요. 행맨 오빠도 대기업 인사 정보는 쉽게 노출되기 어렵다며 신뢰하기 힘들다고 덧붙였어요.</p></div></details>
+<details class="row"><summary><span class="no">27</span><span class="hd"><span class="t">21:04</span>행맨, 분당 648위와 긴 코스에서도 멘탈을 강조</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>행맨 오빠가 분당 648위와 최근 다시 낮아지는 핸디 흐름을 공유했어요. 백티 6712m와 블랙티 약 7400야드 코스도 넓어서 생각보다 부담이 덜하다며, 세컨드 클럽으로 커버할 수 있으면 된다고 설명했네요. 결국 골프는 멘탈이라는 이야기까지 이어졌어요.</p></div></details>
+<details class="row"><summary><span class="no">28</span><span class="hd"><span class="t">21:35</span>미니맨, 에데르송 아들 생일파티에서 축구 스타를 만나다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>미니맨 오빠가 아이 친구 생일파티에 갔다가 친구 아빠가 축구계 유명 인사라는 사실을 알게 된 이야기를 꺼냈어요. 에데르송과 맨시티·브라질 대표팀, 인스타그램 팔로워 500만 이야기가 이어졌고, 즐겨참기 오빠는 핸디를 물어보라는 농담을 보탰네요.</p></div></details>
+<details class="row"><summary><span class="no">29</span><span class="hd"><span class="t">21:46</span>달파란, 1년치 데이터로 선착순 선물게임을 열다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>달파란 오빠가 선착순 선물게임을 시작하자 여러 멤버가 차례로 당첨되며 감사 인사를 남겼어요. 작년 이맘때부터 데이터를 저장해왔다고 밝혔고, 클스웨버 오빠에게는 2달짜리 마일리지가 돌아갔네요. “500!!!”이라는 반응과 함께 꾸준한 운영을 칭찬하는 분위기가 이어졌어요.</p></div></details>
+<details class="row"><summary><span class="no">30</span><span class="hd"><span class="t">21:50</span>한국용, 러닝으로 골프대회와 새 신발을 노리다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>한국용 오빠가 갈비 부상 뒤 올해 4월부터 다시 달려 약 200km를 뛰었다고 얘기했어요. 신발을 바꾸려면 더 많이 뛰어야 한다는 말에 섭카가 달리고 싶다는 마음을 보탰고, 행맨 오빠는 러닝 골프대회를 열자는 아이디어를 꺼냈네요. 실제 대회와 무리뉴 오빠의 ‘최단 시간 골프’ 발상까지 이어졌어요.</p></div></details>
+<details class="row"><summary><span class="no">31</span><span class="hd"><span class="t">22:12</span>희야, 카트비·캐디비와 40분 대기를 안내하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>희야 오빠가 고객 응대 말투로 카트비와 캐디비를 내야 한다고 안내하면서 대기 시간이 40분이라는 상황까지 덧붙였어요. 골프장 이용료와 대기 안내를 담은 짧은 상황극이었네요.</p></div></details>
+<details class="row"><summary><span class="no">32</span><span class="hd"><span class="t">22:18</span>차분히, 포어 캐디와 앞팀 사이를 슈웅 날려 보내다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>차분히 오빠가 포어 캐디가 있는지, 앞팀을 맞출 수 있는지를 묻자 즐겨참기 오빠가 앞팀에 올헤형이 있는지 되물었어요. 이어 공이 퍼팅 옆으로 굴러가는 장면을 ‘슈웅’과 ‘뽀올’로 풀어내며 골프 상황극을 이어갔네요.</p></div></details>
+<details class="row"><summary><span class="no">33</span><span class="hd"><span class="t">22:39</span>달파란, 바뀐 갤럭시 헬스 UI를 알려주다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>에어웨이가 화면에 나온 앱이 무엇인지 묻자 달파란 오빠가 갤럭시 헬스라고 알려줬어요. 최근 사용자 인터페이스가 바뀌었다는 설명까지 더해져 앱을 알아보던 대화가 업데이트 소식으로 이어졌네요.</p></div></details>
+  </section>
+
+  <section id="rounds" class="section"><div class="grid section-head"><span class="section-index">02</span><h2 class="section-title">오늘의 하이라이트</h2><p class="section-meta">Selected / 3</p></div><details class="row"><summary><span class="no">01</span><span class="hd">달파란·프레드, 좁은 페어웨이 베뉴지 난이도에 공감</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>달파란 오빠가 베뉴지인지 묻자 프레드 오빠가 어렵다고 답했고, 페어웨이가 좁은 구장이라는 설명이 이어졌어요. 마하 오빠도 힐코스 티업 소식을 전하면서 아침부터 각자 라운드 분위기를 나눴네요.</p></div></details><details class="row"><summary><span class="no">02</span><span class="hd">이너피스, 투버디·82타 라운드 뒤 100일 기념 선물을 열다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>이너피스 오빠가 회사 팀장님 호출로 다녀온 라운드에서 8만9천 원에 준수한 컨디션을 경험했고, 투버디와 82타 기록도 전했어요. 이어 아이들과 라운드한 지 100일을 기념해 선착순 선물을 열었고, 여러 멤버의 당첨 소식과 감사 인사가 이어졌네요.</p></div></details><details class="row"><summary><span class="no">03</span><span class="hd">즐겨참기, 슼 12시 라운드 동반자를 모집하다</span><span class="chev" aria-hidden="true">›</span></summary><div class="det"><p>즐겨참기 오빠가 슼에 12시부터 자리가 있다고 알리며 함께 갈 사람을 찾았어요. 12시 30분 티타임을 제안했지만, 진독 오빠는 일정 변경으로 오전 예약을 취소했다가 다시 상황이 바뀌었다고 전했네요.</p></div></details></section>
+  <section id="sched" class="section"><div class="grid section-head"><span class="section-index">03</span><h2 class="section-title">다가오는 일정</h2><p class="section-meta">From the chat</p></div><ol class="sched"><li><span class="when"><b>-</b></span><span class="what">다가오는 일정 없음</span></li></ol></section>
+  <section id="links" class="section"><div class="grid section-head"><span class="section-index">04</span><h2 class="section-title">공유된 링크</h2><p class="section-meta">References / 10</p></div><ul class="links"><li><span class="t">지도·위치</span><a href="https://naver.me/F1a97z27" target="_blank" rel="noopener noreferrer nofollow"><b>주식시장 오후 8시까지 거래</b><span>naver.me</span></a><small>진독</small></li><li><span class="t">커뮤니티</span><a href="https://aagag.com/issue/?idx=1654299" target="_blank" rel="noopener noreferrer nofollow"><b>제네시스의 정체불명 신차 개발</b><span>aagag.com</span></a><small>냉라면</small></li><li><span class="t">커뮤니티</span><a href="https://aagag.com/issue/?idx=1593439_1" target="_blank" rel="noopener noreferrer nofollow"><b>충격적인 사건에 경악한 반응</b><span>aagag.com</span></a><small>냉라면</small></li><li><span class="t">지도·위치</span><a href="https://naver.me/GvWh5Fmv" target="_blank" rel="noopener noreferrer nofollow"><b>5만원에 낙찰된 물건</b><span>naver.me</span></a><small>불법</small></li><li><span class="t">커뮤니티</span><a href="https://aagag.com/issue/?idx=420259" target="_blank" rel="noopener noreferrer nofollow"><b>번호판 떨어진 차량 사고</b><span>aagag.com</span></a><small>냉라면</small></li><li><span class="t">지도·위치</span><a href="https://naver.me/GgUhGiyq" target="_blank" rel="noopener noreferrer nofollow"><b>G마켓 광고 경쟁자는 유튜버</b><span>naver.me</span></a><small>진독</small></li><li><span class="t">기타</span><a href="https://comp.wisereport.co.kr/company/c1010001.aspx?cmp_cd=000810" target="_blank" rel="noopener noreferrer nofollow"><b>에프앤가이드 상장기업 분석</b><span>comp.wisereport.co.kr</span></a><small>진독</small></li><li><span class="t">기타</span><a href="https://www.alphabiz.co.kr/news/articleView.html?idxno=184409" target="_blank" rel="noopener noreferrer nofollow"><b>GIC, 삼성화재 지분 5% 확보</b><span>www.alphabiz.co.kr</span></a><small>진독</small></li><li><span class="t">기타</span><a href="https://www.catch.co.kr/Comp/CompSummary/870056" target="_blank" rel="noopener noreferrer nofollow"><b>삼성화재 기업정보와 채용 분석</b><span>www.catch.co.kr</span></a><small>진독</small></li><li><span class="t">기타</span><a href="https://www.judal.co.kr/?view=stockAI&amp;shareToken=3nS5m3HWXsd2NJHL" target="_blank" rel="noopener noreferrer nofollow"><b>삼성화재 매수 유지 투자분석</b><span>www.judal.co.kr</span></a><small>진독</small></li></ul></section>
+
+  <section id="gift" class="section">
+    <div class="grid section-head"><span class="section-index">05</span><h2 class="section-title">선물 기록</h2><p class="section-meta">Give &amp; take</p></div>
+    <div class="grid split"><div class="col"><h3>오늘 쏜 사람</h3><ol class="lst"><li><span class="rk">1회</span><span>차분히</span></li><li><span class="rk">1회</span><span>제나토리</span></li><li><span class="rk">1회</span><span>이너피스</span></li><li><span class="rk">1회</span><span>달파란</span></li><li><span class="rk">1회</span><span>Andrew Choe</span></li></ol></div><div class="col"><h3>오늘 받은 사람</h3><ol class="lst"><li><span class="rk">5건</span><span>복실</span></li><li><span class="rk">5건</span><span>내곰</span></li><li><span class="rk">4건</span><span>즐겨참기</span></li><li><span class="rk">4건</span><span>숲속의바람</span></li><li><span class="rk">3건</span><span>티비리</span></li><li><span class="rk">3건</span><span>진독</span></li><li><span class="rk">3건</span><span>제나토리</span></li><li><span class="rk">3건</span><span>올드헤드</span></li><li><span class="rk">3건</span><span>드래곤</span></li><li><span class="rk">3건</span><span>달파란</span></li></ol></div></div>
+    <div class="grid split mtop"><div class="col"><h3>이번달 쏜 사람 <span class="tag">Top 5</span></h3><ol class="lst"><li><span class="rk">5회</span><span>제나토리</span></li><li><span class="rk">4회</span><span>지오</span></li><li><span class="rk">4회</span><span>아!럭키</span></li><li><span class="rk">3회</span><span>달파란</span></li><li><span class="rk">2회</span><span>클스웨버</span></li></ol></div><div class="col"><h3>이번달 받은 사람 <span class="tag">Top 5</span></h3><ol class="lst"><li><span class="rk">30건</span><span>즐겨참기</span></li><li><span class="rk">29건</span><span>복실</span></li><li><span class="rk">25건</span><span>진독</span></li><li><span class="rk">24건</span><span>달파란</span></li><li><span class="rk">21건</span><span>차분히</span></li></ol></div></div>
+  </section>
+
+  <section id="talk" class="section">
+    <div class="grid section-head"><span class="section-index">06</span><h2 class="section-title">토크 기여자</h2><p class="section-meta">Messages ranked</p></div>
+    <div class="bars"><div class="bar podium1"><span class="crown" title="1등" aria-label="1등">👑</span><span class="nm">무리뉴</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">50</span></div><div class="bar podium2"><span class="rank r2">2</span><span class="nm">냉라면</span><span class="track"><span class="fill" style="width:94.0%"></span></span><span class="v">47</span></div><div class="bar podium3"><span class="rank r3">3</span><span class="nm">즐겨참기</span><span class="track"><span class="fill" style="width:84.0%"></span></span><span class="v">42</span></div><div class="bar podium0"><span class="rank r0">4</span><span class="nm">차분히</span><span class="track"><span class="fill" style="width:82.0%"></span></span><span class="v">41</span></div><div class="bar podium0"><span class="rank r0">5</span><span class="nm">벼갈</span><span class="track"><span class="fill" style="width:80.0%"></span></span><span class="v">40</span></div><div class="bar podium0"><span class="rank r0">6</span><span class="nm">Andrew Choe</span><span class="track"><span class="fill" style="width:76.0%"></span></span><span class="v">38</span></div><div class="bar podium0"><span class="rank r0">7</span><span class="nm">행맨</span><span class="track"><span class="fill" style="width:70.0%"></span></span><span class="v">35</span></div><div class="bar podium0"><span class="rank r0">8</span><span class="nm">달파란</span><span class="track"><span class="fill" style="width:62.0%"></span></span><span class="v">31</span></div><div class="bar podium0"><span class="rank r0">9</span><span class="nm">진독</span><span class="track"><span class="fill" style="width:56.0%"></span></span><span class="v">28</span></div><div class="bar podium0"><span class="rank r0">10</span><span class="nm">제나토리</span><span class="track"><span class="fill" style="width:50.0%"></span></span><span class="v">25</span></div><div class="bar podium0"><span class="rank r0">11</span><span class="nm">한국용</span><span class="track"><span class="fill" style="width:40.0%"></span></span><span class="v">20</span></div><div class="bar podium0"><span class="rank r0">12</span><span class="nm">내곰</span><span class="track"><span class="fill" style="width:38.0%"></span></span><span class="v">19</span></div><div class="bar podium0"><span class="rank r0">13</span><span class="nm">칼튼</span><span class="track"><span class="fill" style="width:34.0%"></span></span><span class="v">17</span></div><div class="bar podium0"><span class="rank r0">14</span><span class="nm">지오</span><span class="track"><span class="fill" style="width:32.0%"></span></span><span class="v">16</span></div><div class="bar podium0"><span class="rank r0">15</span><span class="nm">히즈히즈</span><span class="track"><span class="fill" style="width:26.0%"></span></span><span class="v">13</span></div></div>
+    <div class="mtop"><h3 class="kicker">이번달 누적 · Top 10</h3><div class="bars"><div class="bar podium1"><span class="crown" title="1등" aria-label="1등">👑</span><span class="nm">무리뉴</span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">1130</span></div><div class="bar podium2"><span class="rank r2">2</span><span class="nm">행맨</span><span class="track"><span class="fill" style="width:86.3%"></span></span><span class="v">975</span></div><div class="bar podium3"><span class="rank r3">3</span><span class="nm">제나토리</span><span class="track"><span class="fill" style="width:80.3%"></span></span><span class="v">907</span></div><div class="bar podium0"><span class="rank r0">4</span><span class="nm">진독</span><span class="track"><span class="fill" style="width:73.3%"></span></span><span class="v">828</span></div><div class="bar podium0"><span class="rank r0">5</span><span class="nm">닼돌</span><span class="track"><span class="fill" style="width:61.5%"></span></span><span class="v">695</span></div><div class="bar podium0"><span class="rank r0">6</span><span class="nm">냉라면</span><span class="track"><span class="fill" style="width:60.1%"></span></span><span class="v">679</span></div><div class="bar podium0"><span class="rank r0">7</span><span class="nm">내곰</span><span class="track"><span class="fill" style="width:58.2%"></span></span><span class="v">658</span></div><div class="bar podium0"><span class="rank r0">8</span><span class="nm">즐겨참기</span><span class="track"><span class="fill" style="width:57.3%"></span></span><span class="v">647</span></div><div class="bar podium0"><span class="rank r0">9</span><span class="nm">Andrew Choe</span><span class="track"><span class="fill" style="width:53.0%"></span></span><span class="v">599</span></div><div class="bar podium0"><span class="rank r0">10</span><span class="nm">희야</span><span class="track"><span class="fill" style="width:49.2%"></span></span><span class="v">556</span></div></div></div>
+  </section>
+
+  <nav class="archive grid" aria-label="이전 요약">
+    <h2 class="archive-title">이전 요약 보기</h2>
+    <div class="pn"><a class="pv" href="../2026-09-11/"><small>← Previous</small><b>9월 11일(금)</b></a><span class="nx"><small>Next →</small><b>9월 13일(일)</b></span></div>
+    <div class="chips"><a href="../2026-09-21/">9월 21일(월)</a><a href="../2026-09-20/">9월 20일(일)</a><a href="../2026-09-19/">9월 19일(토)</a><a href="../2026-09-18/">9월 18일(금)</a><a href="../2026-09-17/">9월 17일(목)</a></div><a class="all" href="../archive/">전체 목록 · 181일 →</a>
+  </nav>
+  <footer class="foot"><span>2026-09-12</span><span>다인이가 정리했어요 · 오빠들 오늘도 고생하셨어요 💛</span></footer>
+</div>
+<script>
+(function () {
+  var KEY = 'kbundang-theme';
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.theme-switch button');
+  function apply(mode) {
+    if (mode === 'light' || mode === 'dark') { root.setAttribute('data-theme', mode); }
+    else { root.removeAttribute('data-theme'); mode = 'system'; }
+    buttons.forEach(function (b) { b.classList.toggle('on', b.dataset.themeChoice === mode); });
+  }
+  var saved = localStorage.getItem(KEY) || 'system';
+  apply(saved);
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var mode = b.dataset.themeChoice;
+      localStorage.setItem(KEY, mode);
+      apply(mode);
+    });
+  });
+})();
+</script>
+</body>
+</html>
